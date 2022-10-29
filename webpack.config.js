@@ -1,13 +1,19 @@
 const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+    open: true,
+  },
   mode: "development",
-  devtool: "source-map",
-  context: __dirname,
-  target: "node",
+  target: "web",
   output: {
     path: path.resolve(__dirname, "./dist"),
-    publicPath: "./dist/"
   },
   resolve: {
     extensions: [".ts", ".js"],
@@ -19,7 +25,6 @@ module.exports = {
         include: [path.resolve(__dirname, "src/assembly")],
         loader: "as-loader",
         options: {
-          name: "[name].wasm",
           bind: true,
         },
       },
@@ -30,4 +35,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        path.resolve(__dirname, "src/index.html")
+      ]
+    }),
+  ],
 };
