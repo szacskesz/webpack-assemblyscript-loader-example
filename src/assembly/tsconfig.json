@@ -1,7 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": [
-    "./**/*.ts",
-    "../../node_modules/assemblyscript/std/assembly/index.d.ts"
-  ]
+  "extends": "assemblyscript/std/portable.json",
+  "include": ["./**/*.ts"]
 }

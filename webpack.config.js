@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -10,36 +10,33 @@ module.exports = {
     port: 9000,
     open: true,
   },
-  mode: "development",
-  target: "web",
+  mode: 'development',
+  target: 'web',
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, './dist'),
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        include: [path.resolve(__dirname, "src/assembly")],
-        loader: "as-loader",
+        test: /\.asc\.ts?$/,
+        loader: 'as-loader',
         options: {
-          bind: true,
+          // Options...
         },
       },
       {
         test: /\.ts$/,
-        exclude: [path.resolve(__dirname, "src/assembly")],
-        loader: "ts-loader",
+        exclude: [/\.asc\.ts?$/],
+        loader: 'ts-loader',
       },
     ],
   },
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [
-        path.resolve(__dirname, "src/index.html")
-      ]
+      patterns: [path.resolve(__dirname, 'src/index.html')],
     }),
   ],
 };
